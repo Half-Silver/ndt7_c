@@ -1,0 +1,67 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+bin/
+lib/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Compiled binaries
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+ndt7_c_client
+example
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test results
+*.log
+test_results/
+coverage/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Documentation build
+docs/_build/
+docs/html/
+docs/latex/
+
+# Package files
+*.tar.gz
+*.zip
+*.deb
+*.rpm
+
+# Local configuration
+local_config.h
+config.local
+
+# Generated files
+*.gen.c
+*.gen.h
+

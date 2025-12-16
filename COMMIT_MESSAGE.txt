@@ -1,0 +1,37 @@
+Refactor documentation and add scope disclaimers for public release
+
+This commit updates the project documentation to accurately reflect the
+library's capabilities and limitations, making it suitable for public release.
+
+Key changes:
+
+Documentation updates:
+- Rewrite README with honest positioning as "NDT7-inspired" library
+- Add "Design Goals & Non-Goals" section clarifying project scope
+- Change claims from "full NDT7 implementation" to "NDT7-style" testing
+- Update JSON output description from "matching" to "inspired by" Cloudflare format
+- Add "About This Library" section with use cases and limitations
+- Add "Protocol Notes" section explaining what is/isn't implemented
+- Add disclaimer: "Metric calculations prioritize repeatability and operational
+  usefulness over strict protocol completeness"
+
+Code documentation:
+- Add comprehensive file header comments to ndt7.h explaining library scope
+- Add implementation notes to ndt7.c about capabilities and limitations
+- Add compile-time feature flags (NDT7_HAS_LOCATE_API, NDT7_PROTOCOL_COMPLETE)
+- Document that this is not a full protocol-equivalent replacement
+
+New files:
+- CONTRIBUTING.md: Contribution guidelines aligned with project scope
+- USAGE.md: Comprehensive usage guide with examples
+- example.c: Simple example program
+- .gitignore: Standard build artifacts and IDE files
+
+These changes address feedback that the library was overstating its capabilities.
+The documentation now accurately positions this as a practical, lightweight C
+implementation optimized for edge devices and Ubuntu Core, rather than claiming
+full protocol compliance.
+
+The library remains functionally unchanged - this is purely documentation and
+scope clarification to set appropriate expectations for users and contributors.
+
