@@ -4,6 +4,7 @@ cmake-build-*/
 out/
 bin/
 lib/
+tests/
 
 # CMake generated files
 CMakeCache.txt
@@ -26,6 +27,8 @@ _deps/
 *.exe
 ndt7_c_client
 example
+test_ndt7
+test_og_ndt7
 
 # IDE files
 .vscode/
