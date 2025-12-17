@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 find_package(OpenSSL REQUIRED)
+find_package(CURL REQUIRED)
 
 # Library
 add_library(ndt7_c STATIC
@@ -18,7 +19,7 @@ target_include_directories(ndt7_c
 )
 
 target_link_libraries(ndt7_c
-    PUBLIC OpenSSL::SSL OpenSSL::Crypto
+    PUBLIC OpenSSL::SSL OpenSSL::Crypto CURL::libcurl
 )
 
 # Simple example client

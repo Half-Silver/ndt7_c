@@ -32,15 +32,14 @@ int main(int argc, char *argv[]) {
     /* Initialize with defaults */
     ndt7_settings_init(&settings);
     
-    /* Configure server (use command line arg or default) */
+    /* Configure server - use locate API for automatic discovery */
     if (argc > 1) {
         settings.hostname = argv[1];
+        printf("Using specified NDT7 server: %s (will use locate API for discovery)\n", settings.hostname);
     } else {
-        /* You can set a default server here */
-        settings.hostname = NULL;  /* Will need to set download_url or use Locate API */
-        fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
-        fprintf(stderr, "Example: %s ndt7-mlab1-xxx.measurementlab.net\n", argv[0]);
-        return EXIT_FAILURE;
+        /* Use locate API for automatic server discovery */
+        settings.hostname = NULL;  /* Let locate API find nearest server */
+        printf("Using M-Lab locate API to find nearest NDT7 server...\n");
     }
     
     settings.port = "443";
@@ -48,11 +47,14 @@ int main(int argc, char *argv[]) {
     settings.run_download = 1;
     settings.run_upload = 0;
     
+    /* Optional: Add client metadata as query parameters */
+    settings.query_params = "client_library=ndt7-c-client&client_version=1.0";
+    
     /* Set up logger */
     logger.user_data = NULL;
     logger.info = log_info;
     logger.warning = log_warning;
-    logger.debug = NULL;
+    logger.debug = log_info;  /* Enable debug logging */
     
     /* Run the test */
     printf("Running NDT7 speed test on %s...\n\n", settings.hostname);
@@ -68,6 +70,26 @@ int main(int argc, char *argv[]) {
     printf("Download: %.2f Mbps\n", summary.download_speed_kbit / 1000.0);
     printf("Latency:  %.2f ms\n", summary.latency_ms);
     printf("Jitter:   %.2f µs\n", summary.jitter_us);
+    printf("Packet Loss: %.2f%%\n", summary.packet_loss_percent);
+    printf("Min RTT:  %u µs\n", summary.min_rtt_usec);
+    
+    /* Print network quality scores */
+    printf("\n=== Network Quality ===\n");
+    printf("Video Streaming:  %u/100 (%s)\n", 
+           summary.video_streaming_score, 
+           summary.video_streaming_score >= 80 ? "Great" : 
+           summary.video_streaming_score >= 60 ? "Good" :
+           summary.video_streaming_score >= 40 ? "Fair" : "Poor");
+    printf("Online Gaming:    %u/100 (%s)\n", 
+           summary.online_gaming_score,
+           summary.online_gaming_score >= 80 ? "Great" : 
+           summary.online_gaming_score >= 60 ? "Good" :
+           summary.online_gaming_score >= 40 ? "Fair" : "Poor");
+    printf("Video Chatting:    %u/100 (%s)\n", 
+           summary.video_chatting_score,
+           summary.video_chatting_score >= 80 ? "Great" : 
+           summary.video_chatting_score >= 60 ? "Good" :
+           summary.video_chatting_score >= 40 ? "Fair" : "Poor");
     
     /* Output JSON */
     printf("\n=== JSON Output ===\n");

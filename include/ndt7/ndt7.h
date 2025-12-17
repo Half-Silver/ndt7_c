@@ -41,6 +41,10 @@ typedef struct ndt7_settings {
        When non-NULL, this is used directly and Locate API is skipped. */
     const char *download_url;
 
+    /* Optional query string parameters for WebSocket upgrade request.
+       Should be a URL-encoded string without the leading '?' */
+    const char *query_params;
+
     uint8_t run_download;            /* non-zero to run download test */
     uint8_t run_upload;              /* non-zero to run upload test */
 

@@ -65,4 +65,4 @@ config.local
 *.gen.c
 *.gen.h
 
-COMMIT_MESSAGE.txt
+./COMMIT_MESSAGE.txt
